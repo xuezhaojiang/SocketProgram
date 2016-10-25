@@ -30,11 +30,13 @@ public class UDPClient {
 		DatagramSocket datagramSocket = null;
 		int readSize = -1;
 		try {
-			byte[] receiveAddress = { -64, -88, 60, 18 };
+			String receiveAddress = "192.168.60.243";
+			System.out.println(InetAddress.getByName(receiveAddress));
+			System.out.println(InetAddress.getLocalHost().getHostAddress());
 			randomAccessFile = new RandomAccessFile(SEND_FILE_PATH, "r");
 			// 填写接收方地址，端口号
 			sendDatagramPacket = new DatagramPacket(sendBuf, sendBuf.length,
-					new InetSocketAddress(InetAddress.getByAddress(receiveAddress), UDPUtils.PORT + 1));
+					new InetSocketAddress(InetAddress.getByName(receiveAddress), UDPUtils.PORT + 1));
 			receiveDatagramPacket = new DatagramPacket(receiveBuf, receiveBuf.length);
 			// 自己的端口号
 			datagramSocket = new DatagramSocket(UDPUtils.PORT, InetAddress.getLocalHost());

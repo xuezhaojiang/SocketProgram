@@ -30,10 +30,11 @@ public class UDPServer {
 		// Êä³öÁ÷
 		BufferedOutputStream bufferedOutputStream = null;
 		try {
-			byte[] receiveAddress = { -64, -88, 60, 18 };
+			String receiveAddress = "192.168.60.243";
+			System.out.println(InetAddress.getByName(receiveAddress));
 			System.out.println(InetAddress.getLocalHost().getHostAddress());
 			sendDatagramPacket = new DatagramPacket(sendBuf, sendBuf.length,
-					new InetSocketAddress(InetAddress.getByAddress(receiveAddress), UDPUtils.PORT));
+					new InetSocketAddress(InetAddress.getByName(receiveAddress), UDPUtils.PORT));
 			receiveDatagramPacket = new DatagramPacket(receiveBuf, receiveBuf.length);
 			datagramSocket = new DatagramSocket(UDPUtils.PORT + 1, InetAddress.getLocalHost());
 			bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(SAVE_FILE_PATH));
@@ -49,6 +50,7 @@ public class UDPServer {
 			// The datagram packet also contains the sender's IP address,
 			// and the port number on the sender's machine.
 			datagramSocket.receive(receiveDatagramPacket);
+			
 			while ((readSize = receiveDatagramPacket.getLength()) != 0) {
 				// validate client send exit flag
 				if (UDPUtils.isEqualsByteArray(UDPUtils.exitData, receiveBuf, readSize)) {
@@ -67,8 +69,7 @@ public class UDPServer {
 				sendDatagramPacket.setData(UDPUtils.successData, 0, UDPUtils.successData.length);
 				datagramSocket.send(sendDatagramPacket);
 
-				// receiveDatagramPacket.setData(receiveBuf,0,
-				// receiveBuf.length);
+				// receiveDatagramPacket.setData(receiveBuf,0,receiveBuf.length);
 				System.out.println("receive count of " + (++readCount) + " !");
 				datagramSocket.receive(receiveDatagramPacket);
 			}
