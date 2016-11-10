@@ -27,7 +27,10 @@ public class ChatManager {
 	public void add(ChatSocket cm) {
 		vector.add(cm);
 	}
-
+	//从队列中移除
+	public void remove(ChatSocket cm){
+		vector.remove(cm);
+	}
 	/**
 	 * 发布客户端的消息
 	 * 

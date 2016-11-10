@@ -49,11 +49,17 @@ public class ChatSocket extends Thread {
 
 			}
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {//有客户端退出
+				socket.close();//关闭socket
+				ChatManager.getChatManager().remove(this);//移除队列
+				System.out.println("客户端退出");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			//e.printStackTrace();
 		}
 	}
 }

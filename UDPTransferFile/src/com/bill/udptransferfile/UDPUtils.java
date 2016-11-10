@@ -6,7 +6,8 @@ package com.bill.udptransferfile;
  * @since v1.0 2014/09/21 
  */  
 public class UDPUtils {  
-    private UDPUtils(){}  
+
+	private UDPUtils(){}  
       
     /** transfer file byte buffer **/  
     public static final int BUFFER_SIZE = 5 * 1024;  
@@ -16,8 +17,10 @@ public class UDPUtils {
       
     /** mark transfer success **/  
     public static final byte[] successData = "success data mark".getBytes();  
-      
+    public static final byte[] fileEndData = "file end data mark".getBytes();  
     /** mark transfer exit **/  
+    public static final byte[] rightFile = "file right data mark".getBytes();
+    public static final byte[] wrongFile = "file wrong mark".getBytes();
     public static final byte[] exitData = "exit data mark".getBytes();   
       
     public static void main(String[] args) {  
